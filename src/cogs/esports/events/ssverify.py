@@ -9,32 +9,32 @@ import discord
 from constants import SSType
 
 if TYPE_CHECKING:
-    from core import Quotient
+    from core import Espotive
 
 from collections import defaultdict
 from contextlib import suppress
 
 import humanize
 
-from core import Cog, Context, QuotientRatelimiter
+from core import Cog, Context, EspotiveRatelimiter
 from models import ImageResponse, SSVerify
 from utils import emote, plural
 
 
 class MemberLimits(defaultdict):
     def __missing__(self, key):
-        r = self[key] = QuotientRatelimiter(1, 7)
+        r = self[key] = EspotiveRatelimiter(1, 7)
         return r
 
 
 class GuildLimits(defaultdict):
     def __missing__(self, key):
-        r = self[key] = QuotientRatelimiter(10, 60)
+        r = self[key] = EspotiveRatelimiter(10, 60)
         return r
 
 
 class Ssverification(Cog):
-    def __init__(self, bot: Quotient):
+    def __init__(self, bot: Espotive):
         self.bot = bot
 
         self.request_url = self.bot.config.FASTAPI_URL + "/ocr"
@@ -43,8 +43,8 @@ class Ssverification(Cog):
             "Content-Type": "application/json",
         }
 
-        self.__mratelimiter = MemberLimits(QuotientRatelimiter)  # ss/15s by member
-        self.__gratelimiter = GuildLimits(QuotientRatelimiter)  # ss/minute by guild
+        self.__mratelimiter = MemberLimits(EspotiveRatelimiter)  # ss/15s by member
+        self.__gratelimiter = GuildLimits(EspotiveRatelimiter)  # ss/minute by guild
         self.__verify_lock = asyncio.Lock()
 
     async def __check_ratelimit(self, message: discord.Message):

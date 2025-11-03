@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from core import Quotient
+    from core import Espotive
 
 from discord.ext import tasks
 
@@ -11,8 +11,8 @@ import config
 from core import Cog
 
 
-class QuoTasks(Cog):
-    def __init__(self, bot: Quotient):
+class EspotiveTasks(Cog):
+    def __init__(self, bot: Espotive):
         self.bot = bot
         self.insert_guilds.start()
 

@@ -3,7 +3,7 @@ from __future__ import annotations
 import typing
 
 if typing.TYPE_CHECKING:
-    from core import Quotient
+    from core import Espotive
 
 import asyncio
 from collections import defaultdict
@@ -18,16 +18,16 @@ from models import ArrayRemove, Autorole, Commands
 
 class UserCommandLimits(defaultdict):
     def __missing__(self, key):
-        r = self[key] = cooldown.QuotientRatelimiter(2, 10)
+        r = self[key] = cooldown.EspotiveRatelimiter(2, 10)
         return r
 
 
 class CmdEvents(Cog):
-    def __init__(self, bot: Quotient):
+    def __init__(self, bot: Espotive):
         self.bot = bot
 
         self.command_ratelimited_users = {}
-        self.command_ratelimiter = UserCommandLimits(cooldown.QuotientRatelimiter)
+        self.command_ratelimiter = UserCommandLimits(cooldown.EspotiveRatelimiter)
 
     async def bot_check(self, ctx: Context):
         author = ctx.author
@@ -56,8 +56,8 @@ class CmdEvents(Cog):
 
         if self.bot.lockdown is True:
             t = (
-                "**Quotient is getting new features** 🥳\n"
-                "Dear user, Quotient is updating and is not accepting any commands.\n"
+                "**Espotive is getting new features** 🥳\n"
+                "Dear user, Espotive is updating and is not accepting any commands.\n"
                 "It will back within **2 minutes**.\n"
             )
 
@@ -101,7 +101,7 @@ class CmdEvents(Cog):
             if not member.bot and record.humans:
                 for role in record.humans:
                     try:
-                        await member.add_roles(discord.Object(id=role), reason="Quotient's autorole")
+                        await member.add_roles(discord.Object(id=role), reason="Espotive's autorole")
                     except (discord.NotFound, discord.Forbidden):
                         await Autorole.filter(guild_id=guild.id).update(humans=ArrayRemove("humans", role))
                         continue
@@ -109,7 +109,7 @@ class CmdEvents(Cog):
             elif member.bot and record.bots:
                 for role in record.bots:
                     try:
-                        await member.add_roles(discord.Object(id=role), reason="Quotient's autorole")
+                        await member.add_roles(discord.Object(id=role), reason="Espotive's autorole")
                     except (discord.Forbidden, discord.NotFound):
                         await Autorole.filter(guild_id=guild.id).update(bots=ArrayRemove("bots", role))
                         continue

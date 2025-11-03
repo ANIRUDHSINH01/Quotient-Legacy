@@ -14,7 +14,7 @@ class BaseDbModel(models.Model):
     class Meta:
         abstract = True
 
-    bot: Quotient
+    bot: Espotive
 
 
 from .esports import *

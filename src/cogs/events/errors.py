@@ -3,7 +3,7 @@ from __future__ import annotations
 import typing
 
 if typing.TYPE_CHECKING:
-    from core import Quotient
+    from core import Espotive
 
 import discord
 from discord.ext import commands
@@ -14,7 +14,7 @@ from utils import exceptions
 
 
 class Errors(Cog):
-    def __init__(self, bot: Quotient):
+    def __init__(self, bot: Espotive):
         self.bot = bot
 
     @Cog.listener()
@@ -35,7 +35,7 @@ class Errors(Cog):
         if not hasattr(ctx, "error"):
             ctx.error = ctx.reply
 
-        if isinstance(err, exceptions.QuotientError):
+        if isinstance(err, exceptions.EspotiveError):
             return await ctx.error(err.__str__().format(ctx=ctx), ephemeral=True)
 
         if isinstance(err, commands.MissingRequiredArgument):
@@ -97,7 +97,7 @@ class Errors(Cog):
                     for permission in err.missing_permissions
                 ]
             )
-            message = f"Unfortunately I am missing **`{permissions}`** permissions to run the command `{ctx.command}`.\nThis can be fixed by going to server settings > roles > Quotient and granting Quotient role **`{permissions}`** there."
+            message = f"Unfortunately I am missing **`{permissions}`** permissions to run the command `{ctx.command}`.\nThis can be fixed by going to server settings > roles > Espotive and granting Espotive role **`{permissions}`** there."
             try:
                 await ctx.send(message)
             except discord.Forbidden:

@@ -36,7 +36,7 @@ class HelpCommand(commands.HelpCommand):
 
         server = f"[Support Server]({config.SERVER_LINK})"
         invite = f"[Invite Me]({config.BOT_INVITE})"
-        dashboard = f"[Privacy Policy](https://github.com/quotientbot/Quotient-Bot/wiki/privacy-policy)"
+        dashboard = f"[Privacy Policy](https://github.com/espotivebot/espotive-bot/wiki/privacy-policy)"
 
         embed.description = f"{server} **|** {invite} **|** {dashboard}\n\n"
 

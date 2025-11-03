@@ -11,9 +11,9 @@ from models import AutoPurge, BlockList, EasyTag, Guild, Scrim, SSVerify, TagChe
 class CacheManager:
     def __init__(self, bot):
         if TYPE_CHECKING:
-            from .Bot import Quotient
+            from .Bot import Espotive
 
-        self.bot: Quotient = bot
+        self.bot: Espotive = bot
 
         self.guild_data = {}
         self.eztagchannels = set()

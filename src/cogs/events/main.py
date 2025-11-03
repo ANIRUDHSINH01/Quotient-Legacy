@@ -4,7 +4,7 @@ import typing
 from collections import defaultdict
 
 if typing.TYPE_CHECKING:
-    from core import Quotient
+    from core import Espotive
 
 import re
 from contextlib import suppress
@@ -19,14 +19,14 @@ from models import Guild
 
 class MentionLimits(defaultdict):
     def __missing__(self, key):
-        r = self[key] = cooldown.QuotientRatelimiter(2, 12)
+        r = self[key] = cooldown.EspotiveRatelimiter(2, 12)
         return r
 
 
 class MainEvents(Cog, name="Main Events"):
-    def __init__(self, bot: Quotient) -> None:
+    def __init__(self, bot: Espotive) -> None:
         self.bot = bot
-        self.mentions_limiter = MentionLimits(cooldown.QuotientRatelimiter)
+        self.mentions_limiter = MentionLimits(cooldown.EspotiveRatelimiter)
 
     # incomplete?, I know
     @Cog.listener()

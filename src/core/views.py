@@ -11,10 +11,10 @@ from utils import emote
 if TYPE_CHECKING:
     from .Context import Context
 
-__all__ = ("QuotientView", "QuoInput", "QuoDMView")
+__all__ = ("EspotiveView", "EspotiveInput", "EspotiveDMView")
 
 
-class QuotientView(discord.ui.View):
+class EspotiveView(discord.ui.View):
     message: discord.Message
     custom_id = None
 
@@ -46,7 +46,7 @@ class QuotientView(discord.ui.View):
                 return
 
     async def on_error(self, interaction: discord.Interaction, error: Exception, item) -> None:
-        print("Quotient View Error:", error)
+        print("Espotive View Error:", error)
         self.ctx.bot.dispatch("command_error", self.ctx, error)
 
     @staticmethod
@@ -54,7 +54,7 @@ class QuotientView(discord.ui.View):
         return discord.ui.Button(emoji=emote.info, url=config.SERVER_LINK)
 
 
-class QuoInput(discord.ui.Modal):
+class EspotiveInput(discord.ui.Modal):
     def __init__(self, title: str):
         super().__init__(title=title)
 
@@ -63,7 +63,7 @@ class QuoInput(discord.ui.Modal):
             await interaction.response.defer()
 
 
-class QuoDMView(discord.ui.View):
+class EspotiveDMView(discord.ui.View):
     def __init__(self, *, timeout: float = 180, label: Optional[str] = None):
         super().__init__(timeout=timeout)
 

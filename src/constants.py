@@ -162,16 +162,16 @@ def random_thanks():
 
 tips = (
     "We have an awesome support server:\ndiscord.gg/zXw3BuwtRe",
-    "You can set custom reactions for tourneys & scrims with Quotient Legacy.",
+    "You can set custom reactions for tourneys & scrims with Espotive.",
     "I like your face : )",  # I really do
     "You can add a role to multiple users with `role @role @user @user2...` command.",
-    "Quotient Legacy can detect and verify youtube/insta/loco,etc. screenshots (`ssverify` cmd).",
-    "Quotient Legacy is free forever — if you love what we do, you can donate at <https://cycloneaddons.is-a.dev/donate>",
+    "Espotive can detect and verify youtube/insta/loco,etc. screenshots (`ssverify` cmd).",
+    "Espotive is free forever — if you love what we do, you can donate at <https://cycloneaddons.is-a.dev/donate>",
     "You can send customized embeds with `/embed` command.",
     "Scrims Slot Cancel-Claim is available for free with `slotm` command.",
     "You can create tourney groups with `tourney` command.",
     "Scrims Open & Close messages can be designed with `sm` command.",
-    "With Quotient Legacy you can set custom DM message.",
+    "With Espotive you can set custom DM message.",
     # "We also make custom bots, checkout: https://discord.gg/7bKA8kZd44 ",
 )
 

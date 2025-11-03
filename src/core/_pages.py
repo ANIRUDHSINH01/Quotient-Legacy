@@ -8,7 +8,7 @@ import discord
 from utils.default import split_list, emote
 
 from .Context import Context
-from .views import QuotientView
+from .views import EspotiveView
 
 
 class PageLine(T.NamedTuple):
@@ -17,7 +17,7 @@ class PageLine(T.NamedTuple):
     # embed: T.Optional[discord.Embed] = None
 
 
-class QuoPages:
+class EspotivePages:
     def __init__(
         self,
         ctx: Context,
@@ -76,7 +76,7 @@ class QuoPages:
                 _: T.List[PageLine]
                 self.pages.append(PageLine("".join(ent.line for ent in _), _[0].image))
 
-        view = QuoPageView(
+        view = EspotivePageView(
             self.ctx,
             pages=self.pages,
             items=self.items,
@@ -91,7 +91,7 @@ class QuoPages:
         view.message = await self.ctx.send(embed=self.embed, view=view)
 
 
-class QuoPageView(QuotientView):
+class EspotivePageView(EspotiveView):
     def __init__(
         self,
         ctx: Context,

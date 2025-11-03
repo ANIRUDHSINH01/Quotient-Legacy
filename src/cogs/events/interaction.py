@@ -14,7 +14,7 @@ __all__ = ("InteractionErrors",)
 
 
 class InteractionErrors(Cog):
-    def __init__(self, bot: Quotient):
+    def __init__(self, bot: Espotive):
         self.bot = bot
         self.bot.tree.interaction_check = self.global_interaction_check
         self.bot.tree.on_error = self.on_app_command_error

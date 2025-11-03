@@ -1,43 +1,39 @@
-# Quotient Legacy - The Ultimate Discord Bot for Esports Management
+# Espotive - The Ultimate Discord Bot for Esports Management
 
 ![Language](https://img.shields.io/badge/lang-Python%203.8-green)
 ![discord.py Version](https://img.shields.io/badge/lib-discord.py%202.0-blue)
 ![Db](https://img.shields.io/badge/db-PostgreSQL-blue)
 ![Library](https://img.shields.io/badge/orm-Tortoise%20ORM-purple)
-![Status](https://img.shields.io/badge/status-legacy-orange)
+![Status](https://img.shields.io/badge/status-maintained-green)
 
-<img align="right" src="https://cdn.discordapp.com/attachments/782161513825042462/937419510447751249/quotient.png" alt="Logo" width="25%">
+<img align="right" src="https://cdn.discordapp.com/attachments/782161513825042462/937419510447751249/quotient.png" alt="Espotive Logo" width="25%">
 
-## 🕊️ In Memory of Rohit - The Original Creator
+## About Espotive
 
-This repository is maintained as a legacy fork in memory of **Rohit**, the original creator and owner of Quotient bot. While the original Quotient bot is no longer operational, this fork preserves his incredible work and keeps the project alive for educational purposes and community use.
+Espotive is the ultimate open-source Discord bot designed specifically for esports servers. Our goal is to empower esports communities by simplifying and streamlining the organization and management of scrims, tournaments, and other events.
 
-## About Quotient Legacy
-
-Quotient Legacy is a maintained fork of the original Quotient bot - the ultimate open-source Discord bot designed specifically for esports servers. Our goal is to preserve and continue the legacy of empowering esports communities by simplifying and streamlining the organization and management of scrims, tournaments, and other events.
-
-> This source is maintained for educational purposes and to honor the original work.
+> This project is a continuation of the original work by Rohit, and is now maintained for the community.
 
 ## Features
-Quotient Legacy preserves all the original multi-functional features, including:
+Espotive includes a wide array of features, including:
 ```
 - Automated Scrims Management
 - Automated Tournaments Management
 - Community engagement tools
-- and much much more...
+- and much more...
 ```
 
 ## Installation & Self-Hosting
 
-Since the original Quotient bot is no longer operational, you can self-host this legacy version:
+To get started with Espotive, you can self-host your own instance:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/CycloneAddons/Quotient-Legacy.git
+   git clone https://github.com/ANIRUDHSINH01/Quotient-Legacy.git
    cd Quotient-Legacy
    ```
 
-2. **Set up environment variables and dependencies** (refer to original configuration)
+2. **Set up environment variables and dependencies** (refer to the configuration guides)
 
 3. **Run the bot:**
    ```bash
@@ -46,36 +42,33 @@ Since the original Quotient bot is no longer operational, you can self-host this
 
 ## 🛠️ Maintenance & Updates
 
-This fork is actively maintained by **CycloneAddons** with:
+This project is actively maintained with:
 - Bug fixes and compatibility updates
 - Security patches
 - Community support
 
 ## How do I contribute?
 
-Contributions are welcome to help maintain this legacy project. Kindly:
-1. Open an issue first for discussion
-2. Follow the existing code style
-3. Respect the original architecture and vision
+Contributions are welcome! To contribute:
+1. Open an issue to discuss your idea.
+2. Follow the existing code style.
+3. Respect the project's architecture and vision.
 
 ## Support
-For support with this legacy version, you can:
-- Open an issue on this repository
-- Join community discussions about the project
+For support, you can:
+- Open an issue on this repository.
+- Join our community discussions.
 
 ## License
-This project remains licensed under the MPL-2.0 license - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MPL-2.0 license - see the [LICENSE](LICENSE) file for details.
 
 ---
 
 ### Original Contributors 👥
-<a href="https://github.com/quotientbot/Quotient-Bot/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=quotientbot/Quotient-Bot" />
+<a href="https://github.com/espotivebot/espotive-bot/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=espotivebot/espotive-bot" />
 </a>
-
-### Legacy Maintainer
-- **CycloneAddons** - Maintaining this legacy fork
 
 ---
 
-*This fork is maintained with respect and gratitude for the original work by Rohit. May his contributions to the Discord bot community be remembered.*
+*This project is maintained with respect and gratitude for the original work by Rohit. May his contributions to the Discord bot community be remembered.*

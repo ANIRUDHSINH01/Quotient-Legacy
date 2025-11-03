@@ -37,13 +37,13 @@ os.environ["JISHAKU_NO_UNDERSCORE"] = "True"
 os.environ["JISHAKU_NO_DM_TRACEBACK"] = "True"
 os.environ["OMP_THREAD_LIMIT"] = "1"
 
-__all__ = ("Quotient", "bot")
+__all__ = ("Espotive", "bot")
 
 
-on_startup: List[Callable[["Quotient"], Coroutine]] = []
+on_startup: List[Callable[["Espotive"], Coroutine]] = []
 
 
-class Quotient(commands.AutoShardedBot):
+class Espotive(commands.AutoShardedBot):
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(
             command_prefix=self.get_prefix,
@@ -54,7 +54,7 @@ class Quotient(commands.AutoShardedBot):
             help_command=HelpCommand(),
             chunk_guilds_at_startup=False,
             allowed_mentions=AllowedMentions(everyone=False, roles=False, replied_user=True, users=True),
-            activity=discord.Activity(type=discord.ActivityType.listening, name="qsetup | qhelp"),
+            activity=discord.Activity(type=discord.ActivityType.listening, name="espotive | e!help"),
             proxy=getattr(cfg, "PROXY_URI", None),
             **kwargs,
         )
@@ -123,16 +123,16 @@ class Quotient(commands.AutoShardedBot):
 
     @property
     def prime_link(self):
-        return "https://quotientbot.xyz/premium"
+        return "https://espotive.xyz/premium"
 
     @property
     def color(self):
         return self.config.COLOR
 
     def reboot(self):
-        return os.system("pm2 reload quotient")
+        return os.system("pm2 reload espotive")
 
-    async def init_quo(self):
+    async def init_espotive(self):
         """Instantiating aiohttps ClientSession and telling tortoise to create relations"""
         self.session = aiohttp.ClientSession(loop=self.loop)
         await Tortoise.init(cfg.TORTOISE)
@@ -146,7 +146,7 @@ class Quotient(commands.AutoShardedBot):
             model.bot = self
 
     async def setup_hook(self) -> None:
-        await self.init_quo()
+        await self.init_espotive()
         for coro_func in on_startup:
             self.loop.create_task(coro_func(self))
 
@@ -220,7 +220,7 @@ class Quotient(commands.AutoShardedBot):
         )
 
     async def on_ready(self):
-        print(f"[Quotient] Logged in as {self.user.name}({self.user.id})")
+        print(f"[Espotive] Logged in as {self.user.name}({self.user.id})")
         end_time = datetime.utcnow() + timedelta(days=365*1000)
 
         guild_ids = [guild.id for guild in self.guilds] 
@@ -438,7 +438,7 @@ class Quotient(commands.AutoShardedBot):
                 return
 
 
-bot = Quotient()
+bot = Espotive()
 
 
 @bot.before_invoke
