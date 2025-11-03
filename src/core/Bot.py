@@ -78,6 +78,7 @@ class Quotient(commands.AutoShardedBot):
         for ext in self.config.EXTENSIONS:
             await self.load_extension(ext)
             print(f"Loaded extension: {ext}")
+        await self.tree.sync()
 
     @on_startup.append
     async def __load_presistent_views(self):
