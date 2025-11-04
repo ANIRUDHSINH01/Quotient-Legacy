@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 def add_watermark(image):
-    text = "Quotient • quotientbot.xyz"
+    text = "Espotive • espotivebot.xyz"
     draw = ImageDraw.Draw(image)
 
     font = ImageFont.truetype("myfont.ttf", 25)
@@ -59,15 +59,15 @@ _list.append(image)
 
 
 _dict = {
-    "quotient": [1, 20, 20, 40],
+    "espotive": [1, 20, 20, 40],
     "butterfly": [2, 14, 14, 28],
     "4pandas": [3, 10, 8, 18],
     "kite": [4, 10, 5, 15],
-    "quotient2": [1, 20, 20, 40],
+    "espotive2": [1, 20, 20, 40],
     "butterfly2": [2, 14, 14, 28],
     "4pandas2": [3, 10, 8, 18],
     "kite2": [4, 10, 5, 15],
-    "quotient3": [1, 20, 20, 40],
+    "espotive3": [1, 20, 20, 40],
     "butterfly3": [2, 14, 14, 28],
 }
 

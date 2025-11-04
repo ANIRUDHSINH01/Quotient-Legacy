@@ -41,9 +41,9 @@ class MediaPartnerView(EsportsBaseView):
 
         if await self.tourney.media_partners.all().count() >= 1 and not await self.ctx.is_premium_guild():
             return await self.ctx.error(
-                "You need Quotient Premium to download Ms Excel file containing all the "
+                "You need Espotive Premium to download Ms Excel file containing all the "
                 f"registration data of your tourneys.\n\n"
-                "Buy Premium for just ₹29 here: https://quotientbot.xyz/premium",
+                "Buy Premium for just ₹29 here: https://espotivebot.xyz/premium",
                 6,
             )
 

@@ -6,21 +6,21 @@ from datetime import datetime, timedelta
 from models import User
 
 if typing.TYPE_CHECKING:
-    from core import Quotient
+    from core import Espotive
 
 from contextlib import suppress
 
 import discord
 
 from constants import IST
-from core import Context, QuotientView
+from core import Context, EspotiveView
 from utils import emote
 
 class BaseView(discord.ui.View):
     def __init__(self, ctx: Context, *, timeout=30.0):
         self.ctx = ctx
         self.message: typing.Optional[discord.Message] = None
-        self.bot: Quotient = ctx.bot
+        self.bot: Espotive = ctx.bot
 
         super().__init__(timeout=timeout)
 
@@ -51,7 +51,7 @@ class VoteButton(BaseView):
         self.add_item(
             discord.ui.Button(
                 style=discord.ButtonStyle.link,
-                url="https://quotientbot.xyz/vote",
+                url="https://espotivebot.xyz/vote",
                 label="Click Here",
             )
         )
@@ -62,7 +62,7 @@ class MoneyButton(BaseView):
         super().__init__(ctx)
 
         self.ctx = ctx
-        self.bot: Quotient = ctx.bot
+        self.bot: Espotive = ctx.bot
 
     @discord.ui.button(style=discord.ButtonStyle.green, custom_id="claim_prime", label="Claim Prime (120 coins)")
     async def claim_premium(self, interaction: discord.Interaction, button: discord.Button):
@@ -74,7 +74,7 @@ class MoneyButton(BaseView):
         _u = await User.get(pk=self.ctx.author.id)
         if not _u.money >= 120:
             return await interaction.followup.send(
-                f"{emote.error} Insufficient Quo Coins in your account.", ephemeral=True
+                f"{emote.error} Insufficient Espotive Coins in your account.", ephemeral=True
             )
 
         end_time = (
@@ -93,12 +93,12 @@ class MoneyButton(BaseView):
             await member.add_roles(discord.Object(id=self.bot.config.PREMIUM_ROLE), reason="They purchased premium.")
 
         await self.ctx.success(
-            "Credited Quotient Legacy for 1 Month to your account,\n\n"
+            "Credited Espotive Premium for 1 Month to your account,\n\n"
             "Use `qboost` in any server to upgrade it with Prime."
         )
 
 
-class SetupButtonView(QuotientView):
+class SetupButtonView(EspotiveView):
     def __init__(self, ctx: Context):
         super().__init__(ctx, timeout=None)
         self.ctx = ctx

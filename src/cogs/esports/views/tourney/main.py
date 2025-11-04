@@ -42,12 +42,12 @@ class TourneyManager(EsportsBaseView):
         ]
 
         _e = discord.Embed(
-            color=self.bot.color, title="Quotient Smart Tournament Manager", url=self.bot.config.SERVER_LINK
+            color=self.bot.color, title="Espotive Smart Tournament Manager", url=self.bot.config.SERVER_LINK
         )
         _e.description = "\n".join(to_show) if to_show else "```Click Create button for new tourney.```"
         _e.set_thumbnail(url=self.ctx.guild.me.display_avatar.url)
         _e.set_footer(
-            text="Quotient Legacy allows unlimited tournaments.",
+            text="Espotive allows unlimited tournaments.",
             icon_url=getattr(self.ctx.author.display_avatar, "url", None),
         )
 
@@ -63,8 +63,8 @@ class TourneyManager(EsportsBaseView):
         if not await self.ctx.is_premium_guild():
             if await Tourney.filter(guild_id=self.ctx.guild.id).count() >= 1:
                 return await self.ctx.error(
-                    f"You need [Quotient Premium](https://quotientbot.xyz/premium) to create more than one tournament.\n"
-                    "\nBuy Prime for just ₹29 here: https://quotientbot.xyz/premium",
+                    f"You need [Espotive Premium](https://espotivebot.xyz/premium) to create more than one tournament.\n"
+                    "\nBuy Prime for just ₹29 here: https://espotivebot.xyz/premium",
                     7,
                 )
 
@@ -169,7 +169,7 @@ class TourneyManager(EsportsBaseView):
         if not _slots:
             return await self.ctx.error(f"{member.mention} don't have any slot in any tourney of this server.", 4)
 
-        _v = QuotientView(self.ctx)
+        _v = EspotiveView(self.ctx)
         _v.add_item(TourneySlotSelec(_slots))
         _v.message = await interaction.followup.send("select the slots you want to cancel", view=_v, ephemeral=True)
 
@@ -293,9 +293,9 @@ class TourneyManager(EsportsBaseView):
         await interaction.response.defer()
         # if not await self.ctx.is_premium_guild():
         #     return await self.ctx.error(
-        #         "You need Quotient Premium to download Ms Excel file containing all the "
+        #         "You need Espotive Premium to download Ms Excel file containing all the "
         #         f"registration data of your tourneys.\n\n"
-        #         "Buy Premium for just ₹29 here: https://quotientbot.xyz/premium",
+        #         "Buy Premium for just ₹29 here: https://espotivebot.xyz/premium",
         #         6,
         #     )
 

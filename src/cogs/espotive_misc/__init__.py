@@ -3,7 +3,7 @@ from __future__ import annotations
 import typing
 
 if typing.TYPE_CHECKING:
-    from core import Quotient
+    from core import Espotive
 import config
 
 import inspect
@@ -19,8 +19,8 @@ import pygit2
 from discord.ext import commands
 from discord import Embed, Color
 
-from cogs.quomisc.helper import format_relative
-from core import Cog, Context, QuotientView
+from cogs.espotive_misc.helper import format_relative
+from core import Cog, Context, EspotiveView
 from models import Commands, Guild, User, Votes
 from utils import LinkButton, LinkType, QuoColor, checks, get_ipm, human_timedelta, truncate_string, emote
 
@@ -29,23 +29,23 @@ from .dev import *
 from .views import MoneyButton, SetupButtonView, VoteButton
 
 
-class Quomisc(Cog, name="quomisc"):
+class EspotiveMisc(Cog, name="espotive_misc"):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command(aliases=("src",))
     async def source(self, ctx: Context, *, search: typing.Optional[str]):
         """Refer to the source code of the bot commands."""
-        og_source_url = "https://github.com/quotientbot/Quotient-Bot"
-        legacy_url = "https://github.com/CycloneAddons/Quotient-Legacy"
+        og_source_url = "https://github.com/espotivebot/espotive-bot"
+        legacy_url = "https://github.com/CycloneAddons/espotive-bot"
 
         if search is None:
             e = Embed(
                 title="📦 Bot Source Code",
                 description=(
-                    f"**Original Quotient Source:** [Click Here]({og_source_url})\n"
-                    f"**Quotient Legacy:** [Private Repository]({legacy_url})\n\n"
-                    "_The Quotient Legacy repo is now open-source with video tutorial._ https://www.youtube.com/watch?v=7E2hB0sX0hg"
+                    f"**Original Espotive Source:** [Click Here]({og_source_url})\n"
+                    f"**Espotive Legacy:** [Private Repository]({legacy_url})\n\n"
+                    "_The Espotive Legacy repo is now open-source with video tutorial._ https://www.youtube.com/watch?v=7E2hB0sX0hg"
                 ),
                 color=config.COLOR
             )
@@ -72,16 +72,16 @@ class Quomisc(Cog, name="quomisc"):
 
     @commands.command(aliases=("inv",))
     async def invite(self, ctx: Context):
-        """Quotient Invite Links."""
+        """Espotive Invite Links."""
         v = discord.ui.View(timeout=None)
         v.add_item(
             discord.ui.Button(
-                style=discord.ButtonStyle.link, label="Invite Quotient (Me)", url=self.bot.config.BOT_INVITE, row=1
+                style=discord.ButtonStyle.link, label="Invite Espotive (Me)", url=self.bot.config.BOT_INVITE, row=1
             )
         )
         v.add_item(
             discord.ui.Button(
-                style=discord.ButtonStyle.link, label="Invite Quotient Legacy", url=self.bot.config.PRO_LINK, row=2
+                style=discord.ButtonStyle.link, label="Invite Espotive Legacy", url=self.bot.config.PRO_LINK, row=2
             )
         )
         v.add_item(
@@ -112,7 +112,7 @@ class Quomisc(Cog, name="quomisc"):
             ctx.author: discord.PermissionOverwrite(read_messages=True, send_messages=True, read_message_history=True),
         }
         channel = await guild.create_text_channel(
-            "quotient-private", overwrites=overwrites, reason=f"Made by {str(ctx.author)}"
+            "espotive-private", overwrites=overwrites, reason=f"Made by {str(ctx.author)}"
         )
         await Guild.filter(guild_id=ctx.guild.id).update(private_channel=channel.id)
 
@@ -120,7 +120,7 @@ class Quomisc(Cog, name="quomisc"):
         e.add_field(
             name="**What is this channel for?**",
             inline=False,
-            value="This channel is made for Quotient to send important announcements and activities that need your attention. If anything goes wrong with any of my functionality I will notify you here. Important announcements from the developer will be sent directly here too.\n\nYou can test my commands in this channel if you like. Kindly don't delete it , some of my commands won't work without this channel.",
+            value="This channel is made for Espotive to send important announcements and activities that need your attention. If anything goes wrong with any of my functionality I will notify you here. Important announcements from the developer will be sent directly here too.\n\nYou can test my commands in this channel if you like. Kindly don't delete it , some of my commands won't work without this channel.",
         )
         e.add_field(
             name="**__Important Links__**", value=f"{support_link} | {invite_link} | {vote_link} | {source}", inline=False
@@ -138,14 +138,14 @@ class Quomisc(Cog, name="quomisc"):
     @commands.bot_has_guild_permissions(manage_channels=True, manage_webhooks=True)
     async def setup_cmd(self, ctx: Context):
         """
-        Setup Quotient in the current server.
+        Setup Espotive in the current server.
         This creates a private channel in the server. You can rename that if you like.
-        Quotient requires manage channels and manage wehooks permissions for this to work.
+        Espotive requires manage channels and manage wehooks permissions for this to work.
         You must have manage server permission.
         """
 
         _view = SetupButtonView(ctx)
-        _view.add_item(QuotientView.tricky_invite_button())
+        _view.add_item(EspotiveView.tricky_invite_button())
         record = await Guild.get(guild_id=ctx.guild.id)
 
         if record.private_ch is not None:
@@ -184,7 +184,7 @@ class Quomisc(Cog, name="quomisc"):
     @commands.command(aliases=("stats",))
     @commands.cooldown(1, 10, commands.BucketType.guild)
     async def about(self, ctx: Context):
-        """Statistics of Quotient."""
+        """Statistics of Espotive."""
         db_latency = await self.bot.db_latency
 
         version = pkg_resources.get_distribution("discord.py").version
@@ -213,7 +213,7 @@ class Quomisc(Cog, name="quomisc"):
             description=f"{emote.diamond} **Latest Changes:**\n{revision}",
             color=self.bot.color
         )
-        embed.title = f"{emote.bot} Quotient - The Legacy Continues"
+        embed.title = f"{emote.bot} Espotive - The Legacy Continues"
         embed.url = ctx.config.SERVER_LINK
         embed.set_author(name=str(owner), icon_url=owner.display_avatar.url)
 
@@ -250,7 +250,7 @@ class Quomisc(Cog, name="quomisc"):
 
         embed.add_field(
              name=f"{emote.diamond} Legacy & Tribute",
-             value=f"Originally created by [**{str(legacy_owner)}**](https://github.com/deadaf), whose vision built the foundation of Quotient.",
+             value=f"Originally created by [**{str(legacy_owner)}**](https://github.com/deadaf), whose vision built the foundation of Espotive.",
              inline=False,
           )
 
@@ -302,7 +302,7 @@ class Quomisc(Cog, name="quomisc"):
     @commands.has_permissions(manage_guild=True)
     @checks.is_premium_guild()
     async def color(self, ctx: Context, *, new_color: QuoColor):
-        """Change color of Quotient's embeds"""
+        """Change color of Espotive's embeds"""
         color = int(str(new_color).replace("#", ""), 16)  # The hex value of a color.
 
         self.bot.cache.guild_data[ctx.guild.id]["color"] = color
@@ -313,7 +313,7 @@ class Quomisc(Cog, name="quomisc"):
     @checks.is_premium_guild()
     @commands.has_permissions(manage_guild=True)
     async def footer(self, ctx: Context, *, new_footer: str):
-        """Change footer of embeds sent by Quotient"""
+        """Change footer of embeds sent by Espotive"""
         if len(new_footer) > 50:
             return await ctx.success(f"Footer cannot contain more than 50 characters.")
 
@@ -325,12 +325,12 @@ class Quomisc(Cog, name="quomisc"):
     async def money(self, ctx: Context):
         user = await User.get(user_id=ctx.author.id)
 
-        e = self.bot.embed(ctx, title="Your Quo Coins")
+        e = self.bot.embed(ctx, title="Your Espotive Coins")
         e.set_thumbnail(url=self.bot.user.display_avatar.url)
 
         e.description = (
-            f"💰 | You have a total of `{user.money} Quo Coins`.\n"
-            f"*Quo Coins can be earned by voting [here]({ctx.config.WEBSITE}/vote)*"
+            f"💰 | You have a total of `{user.money} Espotive Coins`.\n"
+            f"*Espotive Coins can be earned by voting [here]({ctx.config.WEBSITE}/vote)*"
         )
 
         _view = MoneyButton(ctx)
@@ -343,11 +343,11 @@ class Quomisc(Cog, name="quomisc"):
 
     @commands.command()
     async def vote(self, ctx: Context):
-        e = self.bot.embed(ctx, title="Vote for Quotient")
+        e = self.bot.embed(ctx, title="Vote for Espotive")
         e.description = (
             "**Rewards**\n"
             f"{emote.roocool} Voter Role `12 hrs`\n"
-            f"{self.bot.config.PRIME_EMOJI} Quo Coin `x1`"
+            f"{self.bot.config.PRIME_EMOJI} Espotive Coin `x1`"
         )
         e.set_thumbnail(url=self.bot.user.display_avatar.url)
 
@@ -372,14 +372,14 @@ class Quomisc(Cog, name="quomisc"):
     @commands.command()
     async def dashboard(self, ctx: Context):
         await ctx.send(
-            f"Here is the direct link to this server's dashboard:\n<https://quotientbot.xyz/dashboard/{ctx.guild.id}>"
+            f"Here is the direct link to this server's dashboard:\n<https://espotivebot.xyz/dashboard/{ctx.guild.id}>"
         )
 
     @commands.hybrid_command()
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def contributors(self, ctx):
-        """People who made Quotient Possible."""
-        url = f"https://api.github.com/repos/quotientbot/Quotient-Bot/contributors"
+        """People who made Espotive Possible."""
+        url = f"https://api.github.com/repos/espotivebot/espotive-bot/contributors"
 
         e = discord.Embed(title=f"Project Contributors", color=self.bot.color, timestamp=self.bot.current_time)
         e.description = ""
@@ -397,7 +397,7 @@ class Quomisc(Cog, name="quomisc"):
         await ctx.send(embed=e)
 
 
-async def setup(bot: Quotient) -> None:
-    await bot.add_cog(Quomisc(bot))
+async def setup(bot: Espotive) -> None:
+    await bot.add_cog(EspotiveMisc(bot))
     await bot.add_cog(Dev(bot))
     await bot.add_cog(QuoAlerts(bot))
